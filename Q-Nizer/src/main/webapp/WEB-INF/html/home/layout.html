@@ -1,0 +1,106 @@
+<div class="bg-content">
+	<div class="container">
+    	<div class="row">
+     		<article class="span8">
+            	<h3>Customer Information</h3>
+              	<div class="inner-1">
+            		<form id="customer-form">
+            			<div class="alert alert-error" ng-show="error">
+    						 <p ng-bind-html-unsafe='errorMessage'>
+						</div>
+						<div class="alert alert-success" ng-show="success">
+    						{{successMessage}}
+						</div>
+                  		<fieldset>
+                		<div>
+	                    	<label class="name"><strong>Customer Name</strong></label>
+	                    	<input type="text" value="Customer Name" id="customerName" ng-model="customer.name">
+                		</div>
+						<div>
+                    		<label class="phone"><strong>Mobile Phone No.</strong></label>
+                    		<input type="tel" value="Mobile Phone No" id="mobilePhone" ng-model="customer.mobile">
+                		</div>
+                		<div>
+                    		<label class="guests"><strong>No. Of Guests</strong></label>
+                    		<input type="text" value="No. Of Guests"  id="noOfGuests" ng-model="customer.guestCount">
+                		</div>
+                <div>
+                    <label class="wait time"><strong>Suggested Wait Time</strong></label>
+                    <select id="suggestedWaitTime" ng-model="customer.suggestedWaitTime">
+							<option value="">Select One</option>
+							<option value="15">15 mins</option>
+							<option value="30">30 mins</option>
+							<option value="45">45 mins</option>
+							<option value="60">60 mins</option>
+							<option value="75">75 mins</option>
+							<option value="90">90 mins</option>
+							<option value="105">105 mins</option>
+							<option value="120">120 mins</option>
+						</select>
+                </div>
+                <div>
+                    <label class="message">Any Special Requests</label>
+                    <textarea id="specialRequest" ng-model="customer.specialRequest"  class="field span8" rows="4">Any Special Requests</textarea>
+                    </div>
+                <div class="buttons-wrapper"> 
+                <a class="btn btn-1" data-type="reset">Clear</a> 
+    			<a ng-show="editMode" class="btn btn-1" ng-click="updateCustomer(customer)">Update Customer</a>
+    			<a ng-show="!editMode" class="btn btn-1" ng-click="addNewCustomer(customer)">Add Customer</a>
+              	</fieldset>
+                </form>
+          </div>
+            </article>
+    		<article class="span12">
+              <h3>Waiting Customer's</h3>
+	  		  <div ng:app ng-controller="Ctrl">
+ 				{{message}}
+ 				<br>
+			 </div>
+            <div class="alert alert-info" ng-show="customers.length == 0">
+  				No Customers Found
+   		    </div>
+
+            <div ng-show="customers.length > 0">
+			<table>
+			<thead>
+				<tr>
+					<th>Token No.</th>
+					<th>Customer Name</th>
+					<th>Suggested Wait Time (mins)</th>
+					<th>Actual Wait Time (mins)</th>
+					<th>No. Of Guests</th>
+					<th>...........................</th>
+				</tr>
+			</thead>
+			<tbody>
+	
+			     <tr ng-repeat="customer in customers | orderBy:predicate" class="odd gradeX">
+        		 	<td>{{customer.token}}</td>
+            		<td>{{customer.name}}</td>
+            		<td>{{customer.suggestedWaitTime}}</td>
+            		<td ng-class="{{customer.suggestedWaitTime}} > {{customer.actualWaitTime}} && 'color-green' || 'color-red'">{{customer.actualWaitTime}}</td>
+            		<td>{{customer.guestCount}}</td>
+            		<td class="center"><a class="btn btn-1" data-type="submit"  ng-click="fetchCustomersList()">Notify</a> <a class="btn btn-1" data-type="submit"  ng-click="editCustomer(customer)">Edit</a></td>
+        		</tr>
+			</tbody>
+	</table>
+	</div>
+	<div><BR/><BR/></div>
+    </article>
+    </div>
+    </div>
+ </div>
+ 
+ <script>
+ function Ctrl($scope) {
+	  $scope.message = "Last Refresh At " + new Date();
+	    
+	    setTimeout(function () {
+	        $scope.$apply(function () {
+	        	$scope.fetchCustomersList();
+	            $scope.message = "Last Refresh At " + new Date();
+	        });
+	    }, 60000);
+	}
+ </script>
+ 
