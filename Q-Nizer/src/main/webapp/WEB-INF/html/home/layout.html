@@ -50,10 +50,11 @@
                 </form>
           </div>
             </article>
+            
     		<article class="span12">
               <h3>Waiting Customer's</h3>
 	  		  <div ng:app ng-controller="Ctrl">
- 				{{message}}
+ 				{{message}} <a class="btn btn-1" data-type="submit" ng-click="fetchCustomersList" >Refresh Now</a><BR/>
  				<br>
 			 </div>
             <div class="alert alert-info" ng-show="customers.length == 0">
@@ -61,26 +62,25 @@
    		    </div>
 
             <div ng-show="customers.length > 0">
-			<table>
+   		<table class="footable">
 			<thead>
 				<tr>
-					<th>Token No.</th>
+					<th  data-class="expand" data-sort-initial="true">Token No.</th>
 					<th>Customer Name</th>
-					<th>Suggested Wait Time (mins)</th>
-					<th>Actual Wait Time (mins)</th>
-					<th>No. Of Guests</th>
+					<th data-hide="phone,tablet">Suggested Wait Time (mins)</th>
+					<th data-hide="phone,tablet">Actual Wait Time (mins)</th>
+					<th data-hide="phone,tablet">No. Of Guests</th>
 					<th>...........................</th>
 				</tr>
 			</thead>
 			<tbody>
-	
-			     <tr ng-repeat="customer in customers | orderBy:predicate" class="odd gradeX">
+			     <tr ng-repeat="customer in customers | orderBy:predicate" >
         		 	<td>{{customer.token}}</td>
             		<td>{{customer.name}}</td>
             		<td>{{customer.suggestedWaitTime}}</td>
             		<td ng-class="{{customer.suggestedWaitTime}} > {{customer.actualWaitTime}} && 'color-green' || 'color-red'">{{customer.actualWaitTime}}</td>
             		<td>{{customer.guestCount}}</td>
-            		<td class="center"><a class="btn btn-1" data-type="submit"  ng-click="fetchCustomersList()">Notify</a> <a class="btn btn-1" data-type="submit"  ng-click="editCustomer(customer)">Edit</a></td>
+            		<td class="center"><a class="btn btn-1" data-type="submit" role="button"  ng-click="notifyCustomer(customer)" data-toggle="modal">Notify</a> <a class="btn btn-1" data-type="submit"  ng-click="editCustomer(customer)">Edit</a></td>
         		</tr>
 			</tbody>
 	</table>
@@ -88,7 +88,39 @@
 	<div><BR/><BR/></div>
     </article>
     </div>
+    
+ 
+<!-- Notification Modal -->
+
+<div id="notificationModal" class="modal hide fade" tabindex="-1" data-width="760">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+    <h3>Notify  {{customer.name}}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid">
+      <div class="span6">
+        <h5>Some Input</h5>
+        <p><input type="text" class="span12"></p>
+        <p><input type="text" class="span12"></p>
+        <p><input type="text" class="span12"></p>
+      </div>
+      <div class="span6">
+        <h5>Some More Input</h5>
+        <p><input type="text" class="span12"></p>
+        <p><input type="text" class="span12"></p>
+        <p><input type="text" class="span12"></p>
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+ 
+
+
  </div>
  
  <script>
@@ -102,5 +134,10 @@
 	        });
 	    }, 60000);
 	}
- </script>
+ 
+ $(function() {
+   $('.footable').footable();
+ });
+</script>
+
  

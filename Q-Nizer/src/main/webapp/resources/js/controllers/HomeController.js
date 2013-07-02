@@ -53,6 +53,13 @@ var HomeController = function($scope, $http) {
         $scope.editMode = true;
     }
 
+    $scope.notifyCustomer = function(customer) {
+        $scope.resetError();
+        $scope.customer = customer;
+        $scope.editMode = false;
+        $('#notificationModal').modal()
+    }
+    
     $scope.removeCustomer = function(customerToken) {
     	$scope.resetError();
         $http.delete('home/customer/delete' + customerToken).success(function() {

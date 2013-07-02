@@ -16,7 +16,11 @@ App.config(['$routeProvider', function ($routeProvider) {
         controller: HomeController
     });
 
-
+    $routeProvider.when('/dashboard', {
+        templateUrl: 'dashboard/layout',
+        controller: HomeController
+    });
+    
     $routeProvider.otherwise({redirectTo: '/home'});
 }]);
 
