@@ -1,6 +1,5 @@
 function chartSetup(){
 //chart with points
-	alert($("#sincos").length);
 	if($("#sincos").length)
 	{
 		var sin = [], cos = [];

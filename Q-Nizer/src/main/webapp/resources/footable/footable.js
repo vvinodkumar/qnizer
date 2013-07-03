@@ -17,7 +17,7 @@
             delay: 100, // The number of millseconds to wait before triggering the react event
             breakpoints: { // The different screen resolution breakpoints
                 phone: 480,
-                tablet: 1024
+                tablet: 768
             },
             parsers: {  // The default parser to parse the value out of a cell (values are used in building up row detail)
                 alpha: function (cell) {
@@ -405,11 +405,9 @@
                         break;
                     }
                 }
-
                 var breakpointName = (current == null ? 'default' : current['name']);
 
                 var hasBreakpointFired = ft.hasBreakpointColumn(breakpointName);
-
                 $table
                     .removeClass('default breakpoint').removeClass(ft.breakpointNames)
                     .addClass(breakpointName + (hasBreakpointFired ? ' breakpoint' : ''))
@@ -489,6 +487,8 @@
                 $next.show();
             }
         };
+        
+        
 
         ft.getColumnFromTdIndex = function (index) {
             /// <summary>Returns the correct column data for the supplied index taking into account colspans.</summary>
@@ -540,7 +540,7 @@
             $(ft.table).trigger(e);
             return e;
         };
-
+        
         ft.init();
         return ft;
     };

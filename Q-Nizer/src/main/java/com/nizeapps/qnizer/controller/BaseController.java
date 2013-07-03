@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -77,6 +78,23 @@ public class BaseController {
         wrapper.setErrors(errs);
         return wrapper;
     }
+
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	@ExceptionHandler(AccessDeniedException.class) 
+    public @ResponseBody ResponseWrapper handleExceptions(AccessDeniedException anAccessException) {
+        ResponseWrapper wrapper = new ResponseWrapper();
+        wrapper.setMessageType(MessageType.WARN);
+        Error err = new Error();
+        err.setErrorCode("AUTH-ERR");
+        err.setErrorDesc("User is not authenticated.");
+        wrapper.setRootError(err);
+        wrapper.setResponseDateTime(DateUtility.getBusinessDateTime());
+        wrapper.setTxnRefNo(UUID.randomUUID().toString());
+        wrapper.setResponseCode(ERROR_RESPONSE_CODE);
+        return wrapper;
+    }
+	
+
 	
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class) 
