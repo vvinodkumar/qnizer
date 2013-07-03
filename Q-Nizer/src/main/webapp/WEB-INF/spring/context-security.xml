@@ -1,0 +1,33 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http auto-config='true' entry-point-ref="authenticationEntryPoint">
+        <form-login authentication-success-handler-ref="ajaxAuthenticationSuccessHandler"
+                    authentication-failure-handler-ref="ajaxAuthenticationFailureHandler"/>
+        <logout success-handler-ref="ajaxLogoutSuccessHandler" />
+    </http>
+
+    <beans:bean id="authenticationEntryPoint"
+                class="com.nizeapps.qnizer.security.Http401DeniedEntryPoint"/>
+    <beans:bean id="ajaxAuthenticationSuccessHandler"
+                class="com.nizeapps.qnizer.security.AjaxAuthenticationSuccessHandler"/>
+    <beans:bean id="ajaxAuthenticationFailureHandler"
+                class="com.nizeapps.qnizer.security.AjaxAuthenticationFailureHandler"/>
+    <beans:bean id="ajaxLogoutSuccessHandler"
+                class="com.nizeapps.qnizer.security.AjaxLogoutSuccessHandler"/>
+	
+
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="vinod" password="123456" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+    
+</beans:beans>   
