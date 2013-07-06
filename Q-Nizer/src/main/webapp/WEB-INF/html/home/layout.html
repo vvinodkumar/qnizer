@@ -96,26 +96,46 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
     <h3>Notify  {{customer.name}}</h3>
   </div>
+  <div class="alert alert-error" ng-show="error">
+	 <p ng-bind-html-unsafe='errorMessage'>
+	</div>
+	<div class="alert alert-success" ng-show="success">
+		{{successMessage}}
+	</div>
+	  <span style="margin-left:15px;">A text message will be sent to <b>{{customer.name}}'s</b> mobile no <b>{{customer.mobile}}</b></span>
+  <form ng-submit="notify(customer)">
   <div class="modal-body">
     <div class="row-fluid">
       <div class="span6">
-        <h5>Some Input</h5>
-        <p><input type="text" class="span12"></p>
-        <p><input type="text" class="span12"></p>
-        <p><input type="text" class="span12"></p>
-      </div>
+                    <label class="ready-time"><strong>Table Will Be Ready In</strong></label>
+                    <select id="serviceInTime" ng-model="customer.serviceInTime">
+							<option value="5" selected>5 mins</option>
+							<option value="10">10 mins</option>
+							<option value="15">15 mins</option>
+							<option value="20">20 mins</option>
+							<option value="25">25 mins</option>
+							<option value="30">30 mins</option>
+					</select>
+     </div>
       <div class="span6">
-        <h5>Some More Input</h5>
-        <p><input type="text" class="span12"></p>
-        <p><input type="text" class="span12"></p>
-        <p><input type="text" class="span12"></p>
-      </div>
+                    <label class="table-no"><strong>Allocate Table</strong></label>
+                    <select id="serviceRefNo" ng-model="customer.serviceRefNo">
+							<option value="0" selected>Allocate one upon guest arrival</option>
+							<option value="1">Table 1</option>
+							<option value="2">Table 2</option>
+							<option value="3">Table 3</option>
+							<option value="4">Table 4</option>
+							<option value="5">Table 5</option>
+							<option value="6">Table 6</option>
+					</select>
+     </div>
     </div>
   </div>
-  <div class="modal-footer">
+    <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="submit" class="btn btn-1">Notify Customer</button>
   </div>
+  </form>
 </div>
  
 
@@ -136,6 +156,8 @@
  $(function() {
    $('.footable').footable();
  });
+ 
+ 
 </script>
 
  

@@ -46,6 +46,20 @@ var HomeController = function($scope, $http) {
             $scope.setError(response);
         });
     }
+    
+    $scope.notify = function(customer) {
+        $scope.resetError();
+
+        alert('here');
+        $http.put('home/customer/notify', customer).success(function() {
+            $scope.customer.serviceInTime = '0';
+            $scope.customer.serviceRefNo = '0';
+            $scope.setSuccess('Customer Notified Successfully.');
+            $scope.editMode = false;
+        }).error(function(response) {
+            $scope.setError(response);
+        });
+    }
 
     $scope.editCustomer = function(customer) {
         $scope.resetError();
@@ -71,6 +85,7 @@ var HomeController = function($scope, $http) {
     $scope.resetError = function() {
         $scope.error = false;
         $scope.errorMessage = '';
+        $scope.successMessage = '';
     }
 
 

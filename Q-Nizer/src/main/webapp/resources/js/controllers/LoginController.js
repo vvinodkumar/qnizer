@@ -10,11 +10,17 @@ function LoginController($scope, $http, authService) {
 			  }
 		}).
 	    success(function(data, status, headers, config) {
+	    	$scope.error = false;
 	    	 authService.loginConfirmed();
 	    }).
 	    error(function(data, status, headers, config){
 	    	 authService.loginFailed();
 	    });
+	};
+	
+	$scope.launchLogin= function(){
+		$scope.error = false;
+		login.modal();
 	};
 	
 	$scope.logout = function(){

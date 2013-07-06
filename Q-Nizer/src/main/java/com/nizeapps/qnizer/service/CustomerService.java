@@ -14,8 +14,8 @@ public interface CustomerService {
 
 	    public void deleteCustomerByTokenId(int tokenId);
 
-	    public void deleteAll();
-
 	    public void updateCustomer(Customer customer);
+	    
+	    public void notifyCustomer(Customer customer);
 
 }

@@ -40,4 +40,26 @@
   	<url-pattern>/*</url-pattern>
 </filter-mapping>
 
+     <!--  <filter>
+                <filter-name>ESAPIFilter</filter-name>
+                <filter-class>
+                        org.owasp.esapi.filters.ESAPIFilter
+                </filter-class>
+        </filter>
+
+        <filter-mapping>
+                <filter-name>ESAPIFilter</filter-name>
+                <url-pattern>/*</url-pattern>
+        </filter-mapping> -->
+        
+  <filter>
+        <filter-name>ClickjackFilterDeny</filter-name>
+        <filter-class>org.owasp.esapi.filters.ClickjackFilter</filter-class>
+    </filter>
+    
+    <filter-mapping> 
+        <filter-name>ClickjackFilterDeny</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> 
+    
 </web-app>

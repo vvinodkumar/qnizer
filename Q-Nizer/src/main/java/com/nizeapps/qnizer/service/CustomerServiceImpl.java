@@ -3,60 +3,58 @@ package com.nizeapps.qnizer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nizeapps.qnizer.dom.Customer;
+import com.nizeapps.qnizer.repository.CustomerRepository;
 
 @Service("CustomerService")
 public class CustomerServiceImpl implements CustomerService {
 
-    
-    private static List<Customer> custList = new ArrayList<Customer>();
-    private static int tokenId = 0;
+	@Autowired
+	private CustomerRepository custRepo;
+	
+	@Autowired
+	private SendTextMessageService textMsgService;
+	
+	@Autowired
+	private CounterService counter;
     
 	@Override
 	public List<Customer> getAllCustomers() {
-		return custList;
+		return custRepo.findAllCustomers();
 	}
 
 	@Override
 	public Customer getCustomerByTokenId(int tokenId) {
-		for (Customer cust : custList) {
-            if (cust.getToken() == tokenId) {
-                return cust;
-            }
-        }
-        return null;
+		return custRepo.findCustomerByTokenId(tokenId);
 	}
 
 	@Override
 	public void addCustomer(Customer customer) {
-		customer.setToken(++ tokenId);
-		custList.add(customer);		
+		custRepo.addCustomer(customer);	
 	}
 
 	@Override
 	public void deleteCustomerByTokenId(int tokenId) {
-		 Customer cust = getCustomerByTokenId(tokenId);
-	        if (cust != null) {
-	        	custList.remove(cust);
-	            tokenId--;
-	        }
+		custRepo.deleteCustomerByTokenId(tokenId);
 	}
 
-	@Override
-	public void deleteAll() {
-		 custList.clear();
-	     tokenId = 0;
-	}
+	
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		 Customer cust = getCustomerByTokenId(customer.getToken());
-	        if (cust != null) {
-	            custList.remove(cust);
-	            custList.add(customer);
-	        }
+		custRepo.updateCustomer(customer);	
 	}
+
+	@Override
+	public void notifyCustomer(Customer customer) {
+		textMsgService.sendTextNotification(customer);
+		customer.setStatus("Notified");
+		custRepo.updateCustomer(customer);	
+	}
+
+	
 
 }

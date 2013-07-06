@@ -3,11 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" 
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
 	<security:global-method-security pre-post-annotations="enabled"/>
 
@@ -36,6 +40,29 @@
 		<beans:property name="basename" value="messages" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.nizeapps.qnizer" />
+	<beans:bean class="com.nizeapps.qnizer.dom.AppConfig" id="appConfig">
+		 <beans:property name="textFromNo" value="06591847514"/>
+        <beans:property name="textMessage" value="Dear ~CustomerName~, Your table will be ready in ~ServiceInTime~ mins. See you soon."/>
+        <beans:property name="apiKey" value="d089f3ef"/>
+        <beans:property name="apiSecret" value="06805e5b"/>
+  </beans:bean>
 	
+	<context:component-scan base-package="com.nizeapps.qnizer.*" />
+	
+	
+	<beans:bean id="deployProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean" p:location="/WEB-INF/spring/appServlet/db.properties" />
+	
+	
+	<context:property-placeholder properties-ref="deployProperties" />
+
+	<!-- Activate Spring Data MongoDB repository support -->
+  	<mongo:repositories base-package="com.nizapps.qnizer.repository" />
+  	
+  	<!-- MongoDB host -->
+	<mongo:mongo host="${mongo.host.name}" port="${mongo.host.port}"/>
+
+	<!-- Template for performing MongoDB operations -->
+  	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" 
+  			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}"/>
+  			
 </beans:beans>

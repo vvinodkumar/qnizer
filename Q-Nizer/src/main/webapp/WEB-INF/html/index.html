@@ -65,13 +65,18 @@
         <div class="navbar navbar_" >
             <div class="container">
             <h1 class="brand brand_"><a href="#/home"><img alt="" src="resources/images/logo.png"> </a></h1>
+            
+             <a class="btn btn-navbar" id="login-link" ng-click="launchLogin()">Login</a>
+             
              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse_">Menu <span class="icon-bar"></span> </a>
-            <div class="nav-collapse nav-collapse_  collapse" id="menu">
+             
+             <div class="nav-collapse nav-collapse_  collapse" id="menu">
                   <ul class="nav sf-menu">
                 <li class="active"><a href="#/home">Home</a></li>
                 <li><a href="#/dashboard">Dashboard</a></li>
                 <li><a href="blog.html">Settings</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                
               </ul>
                 </div>
  	         </div>
@@ -94,6 +99,7 @@
    <form ng-submit="login()">
   <div class="modal-body">
     <div class="row-fluid">
+     <fieldset>
       <div class="span6">
         <h5>User Name</h5>
         <p><input type="text" class="login-inp" ng-model="username"class="span12"></p>
@@ -102,11 +108,12 @@
         <h5>Password</h5>
         <p><input type="password" class="login-inp" ng-model="password" class="span12"></p>
       </div>
+      </fieldset>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-1">Login</button>
   </div>
   </form>
   </div>
@@ -155,6 +162,7 @@
 <script src="resources/footable/footable.sortable.js"></script>
 <script src="resources/js/controllers/LoginController.js"></script>
 
+<script src="resources/js/event-source.js"></script>
 </body>
 </html>
 

@@ -9,6 +9,8 @@ public class DateUtility {
 	}
 	
 	public static long getElapsedTimeInMinutes(Calendar startTime) {
+		if(startTime == null)
+			return 0L;
 		Calendar currentTime = getBusinessDateTime();
 		long startTimeMillis = startTime.getTimeInMillis();
 		long currentTimeMillis = currentTime.getTimeInMillis();

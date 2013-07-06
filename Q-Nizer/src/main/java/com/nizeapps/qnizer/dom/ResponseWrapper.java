@@ -6,6 +6,7 @@ import java.util.List;
 public class ResponseWrapper {
 	
 	private Nizer responseObject;
+	@SuppressWarnings("rawtypes")
 	private List responseCollection;
 	private String responseCode;
 	private MessageType messageType;
@@ -13,6 +14,7 @@ public class ResponseWrapper {
 	private Calendar responseDateTime; 
 	private Error rootError;
 	private List<Error> errors;
+	private NizerUser user;
 	
 	public Nizer getResponseObject() {
 		return responseObject;
@@ -61,5 +63,11 @@ public class ResponseWrapper {
 	}
 	public void setErrors(List<Error> errors) {
 		this.errors = errors;
+	}
+	public NizerUser getUser() {
+		return user;
+	}
+	public void setUser(NizerUser user) {
+		this.user = user;
 	}
 }

@@ -15,7 +15,7 @@ implements LogoutSuccessHandler {
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		request.getSession().invalidate();
+		request.getSession().invalidate();  
 		response.setStatus(HttpServletResponse.SC_OK);
 		
 	}
