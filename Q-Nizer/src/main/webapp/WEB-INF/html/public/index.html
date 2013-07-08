@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="AngularSpringApp">
+	<head>
+	<title>Q-Buster</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="resources/images/queue.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/queue.png" type="image/x-icon" />
+    <meta name="description" content="Manage your customer's waiting time">
+    <meta name="keywords" content="queue, customer, management, waittime, nowait">
+    <meta name="author" content="">  
+	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="resources/bootstrap/css/responsive.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap-modal.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="resources/bootstrap/css/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="resources/bootstrap/css/touchTouch.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="resources/bootstrap/css/kwicks-slider.css" type="text/css" media="screen">
+	<link href='resources/css/font.css' rel='stylesheet' type='text/css'>
+	<link href="resources/footable/footable-0.1.css" rel="stylesheet" type="text/css" />
+ 	<link href="resources/footable/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="resources/js/jquery.js"></script>
+    <script type="text/javascript" src="resources/js/superfish.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.kwicks-1.5.1.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>    
+	<script type="text/javascript" src="resources/js/jquery.dataTables.js"></script>   
+	<script type="text/javascript" src="resources/js/touchTouch.jquery.js"></script>
+	<script src="resources/js/forms.js"></script>
+	<script src="resources/js/DT_bootstrap.js"></script>
+	<script type="text/javascript">if($(window).width()>1024){document.write("<"+"script src='resources/js/jquery.preloader.js'></"+"script>");}</script>
+
+	<script>		
+		 jQuery(window).load(function() {	
+		 $x = $(window).width();		
+	if($x > 1024)
+	{			
+	jQuery("#content .row").preloader();    }	
+		 
+     jQuery('.magnifier').touchTouch();			
+    jQuery('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){jQuery(this).css('display','none')});	
+  		  }); 
+				
+	</script>
+
+	<!--[if lt IE 8]>
+  		<div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
+ 	<![endif]-->
+	<!--[if (gt IE 9)|!(IE)]><!-->
+	<!--<![endif]-->
+	<!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <link rel="stylesheet" href="resources/bootstrap/css/docs.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="resources/bootstrap/css/ie.css" type="text/css" media="screen">
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
+  <![endif]-->
+  
+</head>
+<body class="qnizer">
+<div class="spinner"></div> 
+<!-- header start -->
+<header >
+      <div class="container clearfix">
+    <div class="row">
+        <div class="span12">
+        <div class="navbar navbar_" >
+            <div class="container">
+            <h1 class="brand brand_"><a href="#/home"><img alt="" src="resources/images/logo.png"> </a></h1>
+            
+             <a class="btn btn-navbar" id="login-link" ng-click="launchLogin()">Login</a>
+             
+             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse_">Menu <span class="icon-bar"></span> </a>
+             
+             <div class="nav-collapse nav-collapse_  collapse" id="menu">
+                  <ul class="nav sf-menu">
+                <li class="active"><a href="#/welcome/home">Home</a></li>
+                <li><a href="#/welcome/howdoesitwork">How</a></li>
+                <li><a href="#/welcome/signup">Sign Up</a></li>
+                <li><a href="#/welcome/pricing">Pricing</a></li>
+                <li><a href="#/welcome/contact">Contact</a></li>
+                
+              </ul>
+                </div>
+ 	         </div>
+            </div>
+      </div>
+        </div>
+  </div>
+</header>
+<div class="bg-content" id="main-content">
+	<div class="container">
+		<div class="row">
+          <div class="span12"> 
+        <!-- slider -->
+        <div class="flexslider">
+              <ul class="slides">
+            <li> <img src="img/slide-1.jpg" alt="" > </li>
+            <li> <img src="img/slide-2.jpg" alt="" > </li>
+            <li> <img src="img/slide-3.jpg" alt="" > </li>
+            <li> <img src="img/slide-4.jpg" alt="" > </li>
+            <li> <img src="img/slide-5.jpg" alt="" > </li>
+          </ul>
+            </div>
+        <span id="responsiveFlag"></span>
+        <div class="block-slogan">
+              <h2>Namaskar!</h2>
+              <div>
+            <p>This template is designed and developed over the Bootstrap frontend framework. Which is a free front-end framework for designers. Template is fully <i>responsive</i> and <i>compatible</i> with all the major browsers.</p>
+            <p style="text-align:center; padding-top:20px;"><a href="#" class="btn btn-1">Download Bootstrap</a></p>
+          </div>
+            </div>
+      </div>
+        </div>
+  </div>
+</div>
+
+<!-- footer -->
+<footer>
+  <div class="container clearfix">
+    <div class="privacy pull-left">&copy; 2013 | <a href="#/home">QNizer</a></div>
+  </div>
+    </footer>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>
+</body>
+</html>

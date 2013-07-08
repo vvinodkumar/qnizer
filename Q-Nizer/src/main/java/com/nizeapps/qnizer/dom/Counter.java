@@ -4,9 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "counters")
-public class Counter {
+public class Counter implements Nizer{
 	@Id 
 	private String id;
+	private int seq;
 	
 	public String getId() {
 		return id;
@@ -14,7 +15,7 @@ public class Counter {
 	public void setId(String id) {
 		this.id = id;
 	}
-	private int seq;
+	
 	public int getSeq() {
 		return seq;
 	}

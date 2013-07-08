@@ -34,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void addCustomer(Customer customer) {
 		custRepo.addCustomer(customer);	
+		textMsgService.sendTextNotification(customer, true);
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void notifyCustomer(Customer customer) {
-		textMsgService.sendTextNotification(customer);
+		textMsgService.sendTextNotification(customer, false);
 		customer.setStatus("Notified");
 		custRepo.updateCustomer(customer);	
 	}

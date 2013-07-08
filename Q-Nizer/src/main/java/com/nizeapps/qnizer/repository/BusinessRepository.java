@@ -16,7 +16,7 @@ import com.nizeapps.qnizer.util.DateUtility;
 
 @Repository
 @Transactional	
-public class CustomerRepository  {
+public class BusinessRepository  {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;

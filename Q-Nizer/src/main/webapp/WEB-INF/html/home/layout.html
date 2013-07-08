@@ -13,19 +13,19 @@
                   		<fieldset>
                 		<div>
 	                    	<label class="name"><strong>Customer Name</strong></label>
-	                    	<input type="text" value="Customer Name" id="customerName" ng-model="customer.name">
+	                    	<input type="text" value="Customer Name" id="customerName" ng-model="customer.name" ng-readonly="readOnlyMode">
                 		</div>
 						<div>
                     		<label class="phone"><strong>Mobile Phone No.</strong></label>
-                    		<input type="tel" value="Mobile Phone No" id="mobilePhone" ng-model="customer.mobile">
+                    		<input type="tel" value="Mobile Phone No" id="mobilePhone" ng-model="customer.mobile" ng-readonly="readOnlyMode">
                 		</div>
                 		<div>
                     		<label class="guests"><strong>No. Of Guests</strong></label>
-                    		<input type="text" value="No. Of Guests"  id="noOfGuests" ng-model="customer.guestCount">
+                    		<input type="text" value="No. Of Guests"  id="noOfGuests" ng-model="customer.guestCount" ng-readonly="readOnlyMode">
                 		</div>
                 <div>
                     <label class="wait time"><strong>Suggested Wait Time</strong></label>
-                    <select id="suggestedWaitTime" ng-model="customer.suggestedWaitTime">
+                    <select id="suggestedWaitTime" ng-model="customer.suggestedWaitTime" ng-disabled="readOnlyMode">
 							<option value="">Select One</option>
 							<option value="15">15 mins</option>
 							<option value="30">30 mins</option>
@@ -39,12 +39,35 @@
                 </div>
                 <div>
                     <label class="message">Any Special Requests</label>
-                    <textarea id="specialRequest" ng-model="customer.specialRequest"  class="field span8" rows="4">Any Special Requests</textarea>
-                    </div>
+                    <textarea id="specialRequest" ng-model="customer.specialRequest"  class="field span8" rows="4" ng-disabled="readOnlyMode">Any Special Requests</textarea>
+                </div>
+                <div ng-show="editMode">
+                    <label class="Status" >Status</label>
+                     <select id="status" ng-model="customer.status">
+							<option value="">New</option>
+							<option value="Notified">Notified</option>
+							<option value="Arrived">Arrived</option>
+							<option value="NoShow">No Show</option>
+						</select>
+                </div>
+                <div ng-show="showTable && editMode">
+                   <label class="table-no"><strong>Allocate Table</strong></label>
+                    <select id="serviceRefNo" ng-model="customer.serviceRefNo" ng-disabled="readOnlyMode">
+							<option value="0" selected>Allocate one upon guest arrival</option>
+							<option value="1">Table 1</option>
+							<option value="2">Table 2</option>
+							<option value="3">Table 3</option>
+							<option value="4">Table 4</option>
+							<option value="5">Table 5</option>
+							<option value="6">Table 6</option>
+					</select>
+                </div>
+                
                 <div class="buttons-wrapper"> 
                 <a class="btn btn-1" data-type="reset">Clear</a> 
     			<a ng-show="editMode" class="btn btn-1" ng-click="updateCustomer(customer)">Update Customer</a>
     			<a ng-show="!editMode" class="btn btn-1" ng-click="addNewCustomer(customer)">Add Customer</a>
+    			</div>
               	</fieldset>
                 </form>
           </div>
@@ -96,15 +119,17 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
     <h3>Notify  {{customer.name}}</h3>
   </div>
-  <div class="alert alert-error" ng-show="error">
-	 <p ng-bind-html-unsafe='errorMessage'>
+  <div class="alert alert-error" ng-show="notificationError">
+	 <p ng-bind-html-unsafe='notifcationErrorMessage'>
 	</div>
-	<div class="alert alert-success" ng-show="success">
-		{{successMessage}}
+	<div class="alert alert-success" ng-show="notificationSuccess">
+		{{notificationSuccessMessage}}
 	</div>
-	  <span style="margin-left:15px;">A text message will be sent to <b>{{customer.name}}'s</b> mobile no <b>{{customer.mobile}}</b></span>
-  <form ng-submit="notify(customer)">
+	 
+  <form ng-submit="notify(customer)" id="notifyForm">
   <div class="modal-body">
+  <span >A text message will be sent to <b>{{customer.name}}'s</b> mobile no <b>{{customer.mobile}}</b></span>
+  <BR/><BR/>
     <div class="row-fluid">
       <div class="span6">
                     <label class="ready-time"><strong>Table Will Be Ready In</strong></label>

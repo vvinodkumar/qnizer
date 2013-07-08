@@ -47,6 +47,7 @@ public class Customer implements Nizer {
 		this.serviceRefNo = serviceRefNo;
 	}
 	public String getStatus() {
+		status = (status==null)?"":status;
 		return status;
 	}
 	public void setStatus(String status) {

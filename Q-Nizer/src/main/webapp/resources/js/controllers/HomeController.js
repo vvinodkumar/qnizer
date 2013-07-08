@@ -14,8 +14,10 @@ var HomeController = function($scope, $http) {
     $scope.addNewCustomer = function(customer) {
        
       
-        $scope.resetError();
+        $scope.resetMessages();
         $http.post('home/customer/add', customer).success(function() {
+        	$scope.readOnlyMode = false;
+        	$scope.setSuccess('Details saved successfully for ' + $scope.customer.name);
             $scope.fetchCustomersList();
             $scope.customer.name = '';
             $scope.customer.mobile = '';
@@ -23,14 +25,17 @@ var HomeController = function($scope, $http) {
             $scope.customer.specialRequest = '';
             $scope.customer.guestCount = '';
             $scope.customer.token = '';
-            $scope.setSuccess('Details saved successfully.');
+            $scope.customer.status = '';
+            $scope.customer.serviceInTime = '5';
+            $scope.customer.serviceRefNo = '0';
+           
         }).error(function(response) {
             $scope.setError(response);
         });
     }
 
     $scope.updateCustomer = function(customer) {
-        $scope.resetError();
+        $scope.resetMessages();
 
         $http.put('home/customer/update', customer).success(function() {
             $scope.fetchCustomersList();
@@ -40,58 +45,90 @@ var HomeController = function($scope, $http) {
             $scope.customer.specialRequest = '';
             $scope.customer.guestCount = '';
             $scope.customer.token = '';
+            $scope.customer.status = '';
+            $scope.customer.serviceInTime = '5';
+            $scope.customer.serviceRefNo = '0';
             $scope.setSuccess('Details saved successfully..');
             $scope.editMode = false;
+            $scope.readOnlyMode = false;
         }).error(function(response) {
             $scope.setError(response);
         });
     }
     
     $scope.notify = function(customer) {
-        $scope.resetError();
+        $scope.resetMessages();
 
-        alert('here');
         $http.put('home/customer/notify', customer).success(function() {
             $scope.customer.serviceInTime = '0';
             $scope.customer.serviceRefNo = '0';
-            $scope.setSuccess('Customer Notified Successfully.');
             $scope.editMode = false;
+            $scope.customer.name = '';
+            $scope.customer.mobile = '';
+            $scope.customer.suggestedWaitTime = '';
+            $scope.customer.specialRequest = '';
+            $scope.customer.guestCount = '';
+            $scope.customer.token = '';
+            $scope.customer.status = '';
+            $scope.customer.serviceInTime = '5';
+            $scope.customer.serviceRefNo = '0';
+            $scope.fetchCustomersList();
+            $scope.setNotificationSuccess('Guest Notified Successfully.');
+            $("#notifyForm").hide();
         }).error(function(response) {
-            $scope.setError(response);
+            $scope.setNotificationError(response);
         });
     }
 
     $scope.editCustomer = function(customer) {
-        $scope.resetError();
+        $scope.resetMessages();
         $scope.customer = customer;
+        if(customer.status =='Notified' || customer.status =='Arrived' || customer.status == 'NoShow' ) {
+        	$scope.readOnlyMode = true;
+        	$scope.showTable = true;
+        } else  {
+        	$scope.showTable = false;
+        	$scope.readOnlyMode = false;
+        }
         $scope.editMode = true;
+        $('html, body').animate({
+        	scrollTop: $("#customer-form").offset().top
+        }, 500);
     }
 
     $scope.notifyCustomer = function(customer) {
-        $scope.resetError();
+    	$("#notifyForm").show();
+    	$scope.readOnlyMode = false;
+        $scope.resetMessages();
         $scope.customer = customer;
         $scope.editMode = false;
         $('#notificationModal').modal()
     }
     
     $scope.removeCustomer = function(customerToken) {
-    	$scope.resetError();
+    	$scope.resetMessages();
         $http.delete('home/customer/delete' + customerToken).success(function() {
             $scope.fetchCustomersList();
         });
     }
 
     
-    $scope.resetError = function() {
+    $scope.resetMessages = function() {
         $scope.error = false;
         $scope.errorMessage = '';
         $scope.successMessage = '';
+        $scope.notificationSuccessMessage = '';
+        $scope.notifcationErrorMessage = '';
+        $scope.notificationSuccess = false;
+        $scope.notificationError = false;
+        $scope.success = false;
+      
     }
 
 
     $scope.setError = function(response) {
+    	$scope.resetMessages();
         $scope.error = true;
-        $scope.success = false;
         var message = response.rootError.errorDesc + "<BR/><BR/>";
         message +=   "Txn Ref No: " + response.txnRefNo  + "<BR/>"
         for (var key in response.errors)
@@ -107,9 +144,33 @@ var HomeController = function($scope, $http) {
         $scope.errorMessage = message;
     }
     $scope.setSuccess = function(message) {
-        $scope.success = true;
-        $scope.error = false;
+    	$scope.resetMessages();
+    	$scope.success = true;
         $scope.successMessage = message;
+    }
+    
+    $scope.setNotificationSuccess = function(message) {
+    	$scope.resetMessages();
+        $scope.notificationSuccess = true;
+        $scope.notificationSuccessMessage = message;
+    }
+    
+    $scope.setNotificationError = function(response) {
+    	$scope.resetMessages();
+        $scope.notificationError = true;
+        var message = response.rootError.errorDesc + "<BR/><BR/>";
+        message +=   "Txn Ref No: " + response.txnRefNo  + "<BR/>"
+        for (var key in response.errors)
+        {
+           if (result.hasOwnProperty(key))
+           {
+              // here you have access to
+              var errorCode = result[key].errorCode;
+              var errorDesc = result[key].errorDesc;
+              message +=  errorCode + ": " + errorDesc;
+           }
+        }
+        $scope.notifcationErrorMessage = message;
     }
 
     $scope.fetchCustomersList();

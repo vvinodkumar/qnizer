@@ -1,6 +1,6 @@
 package com.nizeapps.qnizer.dom;
 
-public class Error {
+public class Error implements Nizer{
 	
 	public String getErrorCode() {
 		return errorCode;

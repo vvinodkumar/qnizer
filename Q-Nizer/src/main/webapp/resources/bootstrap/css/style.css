@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Dorsa);
 @charset "utf-8";
 /* CSS Document */
 a[href^="tel:"] {
@@ -53,7 +52,7 @@ a[href^="tel:"] {
 .m-top {
   margin-top: -7px;
 }
-.overflow.extrÄ{
+.overflow.extrÆ’{
   overflow: visible;
 }
 .left-0 {

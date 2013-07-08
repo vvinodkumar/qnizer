@@ -29,12 +29,19 @@ public class SendTextMessageService {
 	@Autowired
 	AppConfig config;
 	
+  
 
-	private final String COUNTRY ="COUNTRY";
+  	private final String COUNTRY ="COUNTRY";
 	private final String CUST_NAME_REPLACE ="~CustomerName~";
 	private final String SERVICE_TIME_REPLACE ="~ServiceInTime~";
-    public boolean sendTextNotification(Customer customer) {
+	private final String QNO = "~QNO~";
+    public boolean sendTextNotification(Customer customer, boolean welcomeMessage) {
 
+    	
+    	//Dont want to send text messages during development.
+      	if(!config.isSendText())
+      		return true;
+      	
         // Create a client for submitting to Nexmo
         NexmoSmsClient client = null;
         try {
@@ -48,8 +55,16 @@ public class SendTextMessageService {
         // Create a Text SMS Message request object ...
 
         String textToNo = LookupUtility.lookup(COUNTRY, "SG") + customer.getMobile();
-        String textMessage = config.getTextMessage().replace(CUST_NAME_REPLACE, customer.getName());
-        textMessage = textMessage.replace(SERVICE_TIME_REPLACE, customer.getServiceInTime()+"");
+        String textMessage = "";
+        if(welcomeMessage) {
+        	textMessage = config.getTextWelcomeMessage().replace(CUST_NAME_REPLACE, customer.getName());
+        	textMessage = textMessage.replace(QNO, customer.getToken() + "");
+        }
+        else {
+        	textMessage = config.getTextMessage().replace(CUST_NAME_REPLACE, customer.getName());
+        	textMessage = textMessage.replace(SERVICE_TIME_REPLACE, customer.getServiceInTime()+"");
+        	textMessage = textMessage.replace(QNO, customer.getToken() + "");
+        }
         TextMessage message = new TextMessage(config.getTextFromNo(), textToNo, textMessage);
 
         // Use the Nexmo client to submit the Text Message ...
