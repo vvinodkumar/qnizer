@@ -9,8 +9,17 @@ var HomeController = function($scope, $http) {
         $http.get('home/customer/list').success(function(response){
             $scope.customers = response.responseCollection;
         });
-    }
+    };
 
+    
+    $scope.showNewCustomerModel  = function() {
+    	$scope.readOnlyMode = false;
+        $scope.resetMessages();
+        $scope.editMode = false;
+        $('#addCustomerModal').modal()
+    	
+    };
+    
     $scope.addNewCustomer = function(customer) {
        
       
@@ -32,7 +41,7 @@ var HomeController = function($scope, $http) {
         }).error(function(response) {
             $scope.setError(response);
         });
-    }
+    };
 
     $scope.updateCustomer = function(customer) {
         $scope.resetMessages();
@@ -54,7 +63,7 @@ var HomeController = function($scope, $http) {
         }).error(function(response) {
             $scope.setError(response);
         });
-    }
+    };
     
     $scope.notify = function(customer) {
         $scope.resetMessages();
@@ -78,7 +87,7 @@ var HomeController = function($scope, $http) {
         }).error(function(response) {
             $scope.setNotificationError(response);
         });
-    }
+    };
 
     $scope.editCustomer = function(customer) {
         $scope.resetMessages();
@@ -94,7 +103,7 @@ var HomeController = function($scope, $http) {
         $('html, body').animate({
         	scrollTop: $("#customer-form").offset().top
         }, 500);
-    }
+    };
 
     $scope.notifyCustomer = function(customer) {
     	$("#notifyForm").show();
@@ -103,14 +112,9 @@ var HomeController = function($scope, $http) {
         $scope.customer = customer;
         $scope.editMode = false;
         $('#notificationModal').modal()
-    }
+    };
     
-    $scope.removeCustomer = function(customerToken) {
-    	$scope.resetMessages();
-        $http.delete('home/customer/delete' + customerToken).success(function() {
-            $scope.fetchCustomersList();
-        });
-    }
+   
 
     
     $scope.resetMessages = function() {
@@ -123,7 +127,7 @@ var HomeController = function($scope, $http) {
         $scope.notificationError = false;
         $scope.success = false;
       
-    }
+    };
 
 
     $scope.setError = function(response) {
@@ -142,18 +146,19 @@ var HomeController = function($scope, $http) {
            }
         }
         $scope.errorMessage = message;
-    }
+    };
+    
     $scope.setSuccess = function(message) {
     	$scope.resetMessages();
     	$scope.success = true;
         $scope.successMessage = message;
-    }
+    };
     
     $scope.setNotificationSuccess = function(message) {
     	$scope.resetMessages();
         $scope.notificationSuccess = true;
         $scope.notificationSuccessMessage = message;
-    }
+    };
     
     $scope.setNotificationError = function(response) {
     	$scope.resetMessages();
@@ -171,8 +176,8 @@ var HomeController = function($scope, $http) {
            }
         }
         $scope.notifcationErrorMessage = message;
-    }
+    };
 
     $scope.fetchCustomersList();
     $scope.predicate = 'token';
-}
+};

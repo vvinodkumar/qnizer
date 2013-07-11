@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nizeapps.qnizer.dom.CachePolicy;
 import com.nizeapps.qnizer.dom.Customer;
 import com.nizeapps.qnizer.dom.ResponseWrapper;
+import com.nizeapps.qnizer.interceptor.CacheControl;
 import com.nizeapps.qnizer.service.CustomerServiceImpl;
 
 /**
@@ -28,6 +30,7 @@ import com.nizeapps.qnizer.service.CustomerServiceImpl;
 @Controller
 @RequestMapping("/home")
 @PreAuthorize("hasRole('ROLE_USER')")
+@CacheControl(policy = CachePolicy.PRIVATE)
 public class HomeController extends BaseController {
 	
 	AtomicInteger i = new AtomicInteger();

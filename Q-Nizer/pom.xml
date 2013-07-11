@@ -151,8 +151,8 @@
 	<artifactId>jasypt-spring31</artifactId>
 	<version>1.9.0</version>
 </dependency>
-	
-		<!-- ESAPI -->
+
+<!-- ESAPI -->
 	
 		<dependency>
 			<groupId>org.owasp.esapi</groupId>
@@ -202,10 +202,7 @@
 	<artifactId>httpclient</artifactId>
 	<version>4.1.2</version>
 </dependency>
-            
-
-	
-		                    
+         		                    
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -219,7 +216,7 @@
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
-                <configuration>
+              	<configuration>
                     <additionalProjectnatures>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
                     </additionalProjectnatures>

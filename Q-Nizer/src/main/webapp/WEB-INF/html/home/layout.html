@@ -1,31 +1,32 @@
 
     	<div class="row">
-     		<article class="span8">
-            	<h3>Customer Information</h3>
-              	<div class="inner-1">
-            		<form id="customer-form">
-            			<div class="alert alert-error" ng-show="error">
+    		<div id="addCustomerModal" class="modal hide fade" tabindex="-1" >
+     		<article class="span9">
+            		<form id="customer-form" accept-charset="UTF-8" class="form-horizontal">
+                		<fieldset>
+                  		 <legend> Guest Details</legend>
+                  		 <div class="alert alert-error" ng-show="error">
     						 <p ng-bind-html-unsafe='errorMessage'>
-						</div>
-						<div class="alert alert-success" ng-show="success">
+						 </div>
+						 <div class="alert alert-success" ng-show="success">
     						{{successMessage}}
-						</div>
-                  		<fieldset>
-                		<div>
-	                    	<label class="name"><strong>Customer Name</strong></label>
-	                    	<input type="text" value="Customer Name" id="customerName" ng-model="customer.name" ng-readonly="readOnlyMode">
+						 </div>
+						 
+                		 <div class="control-group span4">
+                        	<label class="control-label" for="customerName">Guest's Name</label>
+	                    	<input type="text"  id="customerName" name="customerName" ng-model="customer.name" ng-readonly="readOnlyMode" placeholder="Example: John Doe">
+                       </div>
+                		<div class="control-group span4">
+                  	     	<label class="control-label" for="mobilePhone">Mobile Phone No.</label>
+                    		<input type="tel" id="mobilePhone" name="mobilePhone" ng-model="customer.mobile" ng-readonly="readOnlyMode" placeHolder="Example: 91234567">
                 		</div>
-						<div>
-                    		<label class="phone"><strong>Mobile Phone No.</strong></label>
-                    		<input type="tel" value="Mobile Phone No" id="mobilePhone" ng-model="customer.mobile" ng-readonly="readOnlyMode">
+                		<div class="control-group span4">
+                  	     	<label class="control-label" for="noOfGuests">No. Of Guests</label>
+                    		<input type="tel" name="noOfGuests" id="noOfGuests" name="mobilePhone" ng-model="customer.guestCount" ng-readonly="readOnlyMode" placeHolder="Example: 4">
                 		</div>
-                		<div>
-                    		<label class="guests"><strong>No. Of Guests</strong></label>
-                    		<input type="text" value="No. Of Guests"  id="noOfGuests" ng-model="customer.guestCount" ng-readonly="readOnlyMode">
-                		</div>
-                <div>
-                    <label class="wait time"><strong>Suggested Wait Time</strong></label>
-                    <select id="suggestedWaitTime" ng-model="customer.suggestedWaitTime" ng-disabled="readOnlyMode">
+                		<div class="control-group span4">
+                  	     	<label class="control-label" for="suggestedWaitTime">Suggested Wait Time</label>
+                    		<select id="suggestedWaitTime" name="suggestedWaitTime" ng-model="customer.suggestedWaitTime" ng-disabled="readOnlyMode">
 							<option value="">Select One</option>
 							<option value="15">15 mins</option>
 							<option value="30">30 mins</option>
@@ -35,52 +36,54 @@
 							<option value="90">90 mins</option>
 							<option value="105">105 mins</option>
 							<option value="120">120 mins</option>
-						</select>
-                </div>
-                <div>
-                    <label class="message">Any Special Requests</label>
-                    <textarea id="specialRequest" ng-model="customer.specialRequest"  class="field span8" rows="4" ng-disabled="readOnlyMode">Any Special Requests</textarea>
-                </div>
-                <div ng-show="editMode">
-                    <label class="Status" >Status</label>
-                     <select id="status" ng-model="customer.status">
-							<option value="">New</option>
-							<option value="Notified">Notified</option>
-							<option value="Arrived">Arrived</option>
-							<option value="NoShow">No Show</option>
-						</select>
-                </div>
-                <div ng-show="showTable && editMode">
-                   <label class="table-no"><strong>Allocate Table</strong></label>
-                    <select id="serviceRefNo" ng-model="customer.serviceRefNo" ng-disabled="readOnlyMode">
-							<option value="0" selected>Allocate one upon guest arrival</option>
-							<option value="1">Table 1</option>
-							<option value="2">Table 2</option>
-							<option value="3">Table 3</option>
-							<option value="4">Table 4</option>
-							<option value="5">Table 5</option>
-							<option value="6">Table 6</option>
-					</select>
-                </div>
-                
-                <div class="buttons-wrapper"> 
-                <a class="btn btn-1" data-type="reset">Clear</a> 
-    			<a ng-show="editMode" class="btn btn-1" ng-click="updateCustomer(customer)">Update Customer</a>
-    			<a ng-show="!editMode" class="btn btn-1" ng-click="addNewCustomer(customer)">Add Customer</a>
-    			</div>
-              	</fieldset>
+							</select>
+                		</div>
+                		<div class="control-group span8">
+                	     	<label class="control-label" for="specialRequest">Any Special Requests</label>
+                    		<textarea id="specialRequest" name="specialRequest" ng-model="customer.specialRequest"  class="field span8" rows="2" ng-disabled="readOnlyMode" placeholder="Example: Guest wants to be seated near a window facing the skyline view. "></textarea>
+                    	</div>
+                		<div class="control-group span4" ng-show="editMode">
+                	  	     	<label class="control-label" for="status">Guest Status</label>
+	                    		<select id="status" name="status" ng-model="customer.status">
+								<option value="">New</option>
+								<option value="Notified">Notified</option>
+								<option value="Arrived">Arrived</option>
+								<option value="NoShow">No Show</option>
+							</select>
+                    	</div>
+                		
+                		<div class="control-group span4" ng-show="showTable && editMode">
+                			 	<label class="control-label" for="serviceRefNo">Allocate Table</label>
+	                    		<select id="serviceRefNo" name="serviceRefNo" ng-model="customer.serviceRefNo" ng-disabled="readOnlyMode">
+								<option value="0" selected>Allocate one upon guest arrival</option>
+								<option value="1">Table 1</option>
+								<option value="2">Table 2</option>
+								<option value="3">Table 3</option>
+								<option value="4">Table 4</option>
+								<option value="5">Table 5</option>
+								<option value="6">Table 6</option>
+							</select>
+                    		
+                		</div>
+                		 </fieldset>
+                		 <div class="modal-footer">
+                		 	<button type="button" data-dismiss="modal" class="btn">Close</button>
+                			<a ng-show="editMode" class="btn btn-1" ng-click="updateCustomer(customer)">Update Customer</a>
+    						<a ng-show="!editMode" class="btn btn-1" ng-click="addNewCustomer(customer)">Add Customer</a>
+                		 </div>
+                		 
                 </form>
-          </div>
             </article>
-            
-    		<article class="span12">
-              <h3>Waiting Customer's</h3>
+            </div>
+    		<article class="span8">
+              <p></p>
+              <legend>Waiting Guest's <span style="margin-left:10px;"><a ng-click="showNewCustomerModel();" ><img src="resources/footable/img/plus.png" title="New Guest"/></a></span></legend>
 	  		  <div ng:app ng-controller="Ctrl">
  				{{message}} <a class="btn btn-1" data-type="submit" ng-click="fetchCustomersList" >Refresh Now</a><BR/>
  				<br>
 			 </div>
             <div class="alert alert-info" ng-show="customers.length == 0">
-  				No Customers Found
+  				It's quiet out here. There are no guest's waiting right now.
    		    </div>
 
             <div ng-show="customers.length > 0">

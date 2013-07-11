@@ -20,12 +20,14 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'dashboard/layout',
         controller: HomeController
     });
-    $routeProvider.when('/public', {
+  
+    $routeProvider.when('/public/signup', {
         templateUrl: 'public/signup',
         controller: PublicController
     });
     
-    $routeProvider.otherwise({redirectTo: '/public'});
+    $routeProvider.otherwise({redirectTo: '/public/signup'});
+   
 }]);
 
 

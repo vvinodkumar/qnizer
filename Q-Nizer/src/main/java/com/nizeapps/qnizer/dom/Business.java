@@ -1,19 +1,36 @@
 package com.nizeapps.qnizer.dom;
 
+import javax.validation.constraints.NotNull;
+
+import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.nizeapps.qnizer.repository.CascadeSave;
+
+@Document(collection="businesses")
 public class Business implements Nizer {
 
-	private String id;
+	@Id
+	private ObjectId id;
+
+	@NotEmpty
+	@Length(min=3,max=50)
 	private String name;
-	private String emailId;
-	private String contactPersonName;
-	private String contactPersonNumber;
 	private Pricing pricingModel;
+	@NotNull
+	@DBRef
+	@CascadeSave
 	private Address businessAddress;
+	private String timeZone ="Singapore";
 	
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -21,18 +38,6 @@ public class Business implements Nizer {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getContactPersonName() {
-		return contactPersonName;
-	}
-	public void setContactPersonName(String contactPersonName) {
-		this.contactPersonName = contactPersonName;
-	}
-	public String getContactPersonNumber() {
-		return contactPersonNumber;
-	}
-	public void setContactPersonNumber(String contactPersonNumber) {
-		this.contactPersonNumber = contactPersonNumber;
 	}
 
 	public Pricing getPricingModel() {
@@ -47,13 +52,11 @@ public class Business implements Nizer {
 	public void setBusinessAddress(Address businessAddress) {
 		this.businessAddress = businessAddress;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getTimeZone() {
+		return timeZone;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
 	}
-	
-	
 	
 }

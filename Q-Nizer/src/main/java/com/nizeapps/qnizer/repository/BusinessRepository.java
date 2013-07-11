@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nizeapps.qnizer.dom.Customer;
+import com.nizeapps.qnizer.dom.NizerUser;
+import com.nizeapps.qnizer.exception.ValidationException;
 import com.nizeapps.qnizer.service.CounterService;
 import com.nizeapps.qnizer.util.DateUtility;
 
@@ -21,42 +23,19 @@ public class BusinessRepository  {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@Autowired
-	private CounterService counter;
-	
-	public static final String CUSTOMER_COLLECTION_NAME = "customers";
-	
-	public static final String CUSTOMER_COLLECTION_SEQ = "customerseq";
-	
-	public List<Customer> findAllCustomers() {
-		return mongoTemplate.findAll(Customer.class, CUSTOMER_COLLECTION_NAME);
-	}
-
-    public Customer findCustomerByTokenId(int tokenId) {
+    public NizerUser findBusinessUserByUserName(String userName) {
     	Query query = new Query();
-    	query.addCriteria(Criteria.where("token").is(tokenId));
-     	return mongoTemplate.findOne(query,Customer.class,CUSTOMER_COLLECTION_NAME);
+    	query.addCriteria(Criteria.where("userName").is(userName));
+     	return mongoTemplate.findOne(query,NizerUser.class);
     }
 
-    public void addCustomer(Customer customer) {
+    public void registerBusinessUser(NizerUser user)  {
     	
-    	 if (!mongoTemplate.collectionExists(Customer.class)) {
-             mongoTemplate.createCollection(Customer.class);
+    	
+    	 if (!mongoTemplate.collectionExists(NizerUser.class)) {
+             mongoTemplate.createCollection(NizerUser.class);
          } 
-    	 customer.setToken(counter.getNextSequence(CUSTOMER_COLLECTION_SEQ));
-    	 customer.setId(UUID.randomUUID().toString());
-    	 customer.setCustomerFirstContactTime(DateUtility.getBusinessDateTime());
-         mongoTemplate.insert(customer, CUSTOMER_COLLECTION_NAME);
+         mongoTemplate.insert(user);
     }
 
-    public void updateCustomer(Customer customer) {
-        mongoTemplate.save(customer,CUSTOMER_COLLECTION_NAME);
-   }
-    
-    public void deleteCustomerByTokenId(int tokenId) {
-    	Query query = new Query();
-    	query.addCriteria(Criteria.where("token").is(tokenId));
-        mongoTemplate.remove(query,Customer.class);
-    }
-	
 }

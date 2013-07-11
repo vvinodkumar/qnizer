@@ -44,7 +44,6 @@ public class CustomerRepository  {
              mongoTemplate.createCollection(Customer.class);
          } 
     	 customer.setToken(counter.getNextSequence(CUSTOMER_COLLECTION_SEQ));
-    	 customer.setId(UUID.randomUUID().toString());
     	 customer.setCustomerFirstContactTime(DateUtility.getBusinessDateTime());
          mongoTemplate.insert(customer, CUSTOMER_COLLECTION_NAME);
     }

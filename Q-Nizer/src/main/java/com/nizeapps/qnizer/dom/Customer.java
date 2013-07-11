@@ -4,26 +4,28 @@ import java.util.Calendar;
 
 import javax.validation.constraints.Size;
 
+import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.nizeapps.qnizer.util.DateUtility;
 
 
 public class Customer implements Nizer {
 
-	private String id;
+	@Id
+	private ObjectId id;
 	@NotEmpty
 	@Size(min=2, max=30)
 	private String name;
-	@Size(min=6,max=10)
+	@Length(min=6, max=10)
 	private String mobile;
 	@Range(min=1,max=999)
 	private int guestCount;
-	private int suggestedWaitTime = 0; //Default to zero if no time is entered.
+	private int suggestedWaitTime = 15; //Default to zero if no time is entered.
 	@Transient
 	private long actualWaitTime;
 	private int token;
@@ -102,10 +104,10 @@ public class Customer implements Nizer {
 	public void setCustomerFirstContactTime(Calendar customerFirstContactTime) {
 		this.customerFirstContactTime = customerFirstContactTime;
 	}
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 	public void setActualWaitTime(long actualWaitTime) {

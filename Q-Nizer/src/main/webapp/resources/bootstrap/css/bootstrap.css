@@ -1505,7 +1505,7 @@ legend + .control-group {
   float: left;
   width: 160px;
   padding-top: 5px;
-  text-align: right;
+  text-align: left;
 }
 .form-horizontal .controls {
   *display: inline-block;
@@ -4125,7 +4125,7 @@ input[type="submit"].btn.btn-mini {
   left: 50%;
   z-index: 1050;
   overflow: auto;
-  width: 560px;
+  width: auto;
   margin: -250px 0 0 -280px;
   background-color: #ffffff;
   border: 1px solid #999;
@@ -4879,3 +4879,4 @@ a.badge:hover {
 .affix {
   position: fixed;
 }
+
