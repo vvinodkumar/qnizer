@@ -8,6 +8,7 @@ var PublicController = function($scope, $http) {
 
 	$scope.showTerms = function() {
 	        $('#termsModal').modal();
+	        $("#termsModal").doCenter();
 	};
 
 	  $scope.resetMessages = function() {
@@ -18,7 +19,6 @@ var PublicController = function($scope, $http) {
 	    };
 	  
 	 $scope.signup = function(user) {
-		 alert('here');
 	        $scope.resetMessages();
 	        $http.post('public/business/signup', user).success(function() {
 	        	$scope.setSuccess('User Registration Completed');

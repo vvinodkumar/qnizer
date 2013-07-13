@@ -164,6 +164,23 @@
 </body>
 </html>
 
+<script>
+
+$.fn.doCenter = function () {
+
+	this.css(
+            {
+                'margin-top': function () {
+                    return -($(this).height() / 2);
+                }
+            })
+            
+    return this;
+}
+
+
+</script>
+
 <!--<script src="resources/js/controllers/DashboardController.js"></script>
 <script src="resources/js/controllers/SettingsController.js"></script>
 <script src="resources/js/controllers/ContactController.js"></script>

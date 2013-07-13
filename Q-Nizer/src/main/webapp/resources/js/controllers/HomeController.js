@@ -16,7 +16,8 @@ var HomeController = function($scope, $http) {
     	$scope.readOnlyMode = false;
         $scope.resetMessages();
         $scope.editMode = false;
-        $('#addCustomerModal').modal()
+        $('#addCustomerModal').modal();
+        $("#addCustomerModal").doCenter();
     	
     };
     
@@ -111,7 +112,9 @@ var HomeController = function($scope, $http) {
         $scope.resetMessages();
         $scope.customer = customer;
         $scope.editMode = false;
-        $('#notificationModal').modal()
+        $('#notificationModal').modal();
+        $("#notificationModal").doCenter();
+        
     };
     
    

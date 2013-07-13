@@ -18,7 +18,16 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<annotation-driven>
+    <message-converters register-defaults="true">
+        <beans:bean
+            class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+            <beans:property name="objectMapper">
+                <beans:bean class="com.nizeapps.qnizer.util.CustomObjectMapper"></beans:bean>
+            </beans:property>
+        </beans:bean>
+    </message-converters>
+	</annotation-driven>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -46,7 +55,7 @@
         <beans:property name="textWelcomeMessage" value="Dear ~CustomerName~, We will let you know once your table is ready. Your Queue No is ~QNO~."/>
         <beans:property name="apiKey" value="d089f3ef"/>
         <beans:property name="apiSecret" value="06805e5b"/>
-        <beans:property name="sendText" value="false"/>
+        <beans:property name="sendText" value="true"/>
  	 </beans:bean>
 	
 	<context:component-scan base-package="com.nizeapps.qnizer.*" />
