@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="addresses")
-public class Address implements Nizer{
+public class Address  extends NizerHeader implements Nizer{
 
 	@Id
 	private ObjectId id;

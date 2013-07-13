@@ -1,8 +1,5 @@
 package com.nizeapps.qnizer.repository;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -10,11 +7,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nizeapps.qnizer.dom.Customer;
+import com.nizeapps.qnizer.dom.Address;
+import com.nizeapps.qnizer.dom.Business;
 import com.nizeapps.qnizer.dom.NizerUser;
-import com.nizeapps.qnizer.exception.ValidationException;
-import com.nizeapps.qnizer.service.CounterService;
-import com.nizeapps.qnizer.util.DateUtility;
 
 @Repository
 @Transactional	
@@ -37,5 +32,24 @@ public class BusinessRepository  {
          } 
          mongoTemplate.insert(user);
     }
+    
+    public void activateUser(NizerUser user)  {
+        mongoTemplate.save(user);
+   }
+    
+    public void removeBusinessUser(NizerUser user)  {
+
+        mongoTemplate.remove(user);
+   }
+    
+    public void removeBusiness(Business business)  {
+
+        mongoTemplate.remove(business);
+   }
+    
+    public void removeBusinessAddress(Address address)  {
+
+        mongoTemplate.remove(address);
+   }
 
 }

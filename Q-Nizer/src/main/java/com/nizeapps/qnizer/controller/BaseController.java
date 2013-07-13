@@ -26,7 +26,7 @@ import com.nizeapps.qnizer.dom.MessageType;
 import com.nizeapps.qnizer.dom.Nizer;
 import com.nizeapps.qnizer.dom.NizerUser;
 import com.nizeapps.qnizer.dom.ResponseWrapper;
-import com.nizeapps.qnizer.exception.ValidationException;
+import com.nizeapps.qnizer.exception.NizerApplicationException;
 import com.nizeapps.qnizer.util.DateUtility;
 
 @Controller
@@ -66,8 +66,8 @@ public class BaseController {
     }
 	
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(ValidationException.class) 
-    public @ResponseBody ResponseWrapper handleExceptions(ValidationException aValidationExc) {
+	@ExceptionHandler(NizerApplicationException.class) 
+    public @ResponseBody ResponseWrapper handleExceptions(NizerApplicationException aValidationExc) {
         ResponseWrapper wrapper = initResponseWrapper();
         wrapper.setMessageType(MessageType.USERERROR);
         Error err = new Error();

@@ -20,7 +20,15 @@
                 class="com.nizeapps.qnizer.security.AjaxAuthenticationFailureHandler"/>
     <beans:bean id="ajaxLogoutSuccessHandler"
                 class="com.nizeapps.qnizer.security.AjaxLogoutSuccessHandler"/>
-	
+
+	<beans:bean id="jasyptStringDigester" class="org.jasypt.digest.StandardStringDigester">
+	          <beans:property name="algorithm" value="SHA-1" />
+	          <beans:property name="iterations" value="100000" />
+	          <beans:property name="saltGenerator">
+	               <beans:bean id="randomSaltGenerator" class="org.jasypt.salt.RandomSaltGenerator"/>
+	          </beans:property>
+	          <beans:property name="saltSizeBytes" value="20"/>
+	</beans:bean>
 
 	<authentication-manager>
 		<authentication-provider>

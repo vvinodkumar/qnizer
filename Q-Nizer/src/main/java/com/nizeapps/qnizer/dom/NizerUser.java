@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.nizeapps.qnizer.repository.CascadeSave;
 
 @Document(collection="users")
-public class NizerUser implements Nizer {
+public class NizerUser extends NizerHeader implements Nizer  {
 	
 	@Id
 	private ObjectId id;
@@ -42,7 +42,17 @@ public class NizerUser implements Nizer {
 	@NotEmpty
 	@Length(min=6, max=10)
 	private String phoneNo;
-	private String salt;
+	
+	private Calendar activationDateTime;
+	
+	public Calendar getActivationDateTime() {
+		return activationDateTime;
+	}
+	public void setActivationDateTime(Calendar activationDateTime) {
+		this.activationDateTime = activationDateTime;
+	}
+	private String activationKey;
+	private UserStatus status; 
 	
 	public String getUserName() {
 		return userName;
@@ -107,18 +117,26 @@ public class NizerUser implements Nizer {
 		this.passwordConfirm = passwordConfirm;
 	}
 	
-	public String getSalt() {
-		return salt;
-	}
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-	
 	public ObjectId getId() {
 		return id;
 	}
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+	public String getActivationKey() {
+		return activationKey;
+	}
+	public void setActivationKey(String activationKey) {
+		this.activationKey = activationKey;
+	}
+	
+	public UserStatus getStatus() {
+		return status;
+	}
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
+	
+	
 
 }

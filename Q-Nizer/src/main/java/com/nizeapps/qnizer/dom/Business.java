@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.nizeapps.qnizer.repository.CascadeSave;
 
 @Document(collection="businesses")
-public class Business implements Nizer {
+public class Business  extends NizerHeader implements Nizer {
 
 	@Id
 	private ObjectId id;
