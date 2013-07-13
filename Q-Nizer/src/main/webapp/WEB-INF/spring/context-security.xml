@@ -20,7 +20,20 @@
                 class="com.nizeapps.qnizer.security.AjaxAuthenticationFailureHandler"/>
     <beans:bean id="ajaxLogoutSuccessHandler"
                 class="com.nizeapps.qnizer.security.AjaxLogoutSuccessHandler"/>
-
+                
+	<beans:bean id="nizerAuthManager" class="com.nizeapps.qnizer.service.NizerAuthenticationManagerService">
+		<beans:property name="businessRepo" ref="businessRepo" />
+	</beans:bean>
+ 
+  	<beans:bean id="businessRepo" class="com.nizeapps.qnizer.repository.BusinessRepository">
+  		<beans:property name="mongoTemplate" ref="mongoTemplate" />
+  	</beans:bean>
+  	
+  		
+ 	<authentication-manager>
+ 		<authentication-provider ref="nizerAuthManager"/>
+ 	</authentication-manager>
+ 
 	<beans:bean id="jasyptStringDigester" class="org.jasypt.digest.StandardStringDigester">
 	          <beans:property name="algorithm" value="SHA-1" />
 	          <beans:property name="iterations" value="100000" />
@@ -29,13 +42,5 @@
 	          </beans:property>
 	          <beans:property name="saltSizeBytes" value="20"/>
 	</beans:bean>
-
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="vinod" password="123456" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
     
 </beans:beans>   

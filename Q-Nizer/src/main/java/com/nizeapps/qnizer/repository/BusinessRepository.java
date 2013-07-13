@@ -52,4 +52,13 @@ public class BusinessRepository  {
         mongoTemplate.remove(address);
    }
 
+	public MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
+	}
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+    
 }

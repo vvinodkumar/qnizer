@@ -69,7 +69,7 @@
 	<!-- Template for performing MongoDB operations -->
   	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" 
   			c:mongo-ref="mongo" c:databaseName="${mongo.db.name}"/>
-  			
+  
   	<beans:bean class="com.nizeapps.qnizer.repository.CascadingMongoEventListener" />		
   	
   	<!-- Mandrill Setting Start -->
@@ -92,6 +92,8 @@
 
 	<beans:bean id="apacheHttpClient" class="org.apache.http.impl.client.DefaultHttpClient"/>
 	<beans:bean id="defaultObjectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
+
+
 
 	<beans:bean id="mandrillRESTRequest" class="com.cribbstechnologies.clients.mandrill.request.MandrillRESTRequest">
 		<beans:property name="config" ref="defaultMandrillConfiguration"/>

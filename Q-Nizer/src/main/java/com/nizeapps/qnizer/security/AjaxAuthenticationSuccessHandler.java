@@ -25,9 +25,9 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException,
 			ServletException {
 		Authentication a = SecurityContextHolder.getContext().getAuthentication();
-		User currentUser = (User)a.getPrincipal();
+		String currentUser = (String)a.getPrincipal();
 		NizerUser user = new NizerUser();
-		user.setUserName(currentUser.getUsername());
+		user.setUserName(currentUser);
 		user.setLastLoggedInDateTime(DateUtility.getBusinessDateTime());
 		user.setCsrfToken(ESAPI.randomizer().getRandomString(8,  EncoderConstants.CHAR_ALPHANUMERICS));
 		request.getSession(true).setAttribute(USER_CONTEXT, user);
