@@ -16,8 +16,8 @@ var HomeController = function($scope, $http) {
     	$scope.readOnlyMode = false;
         $scope.resetMessages();
         $scope.editMode = false;
-        $('#addCustomerModal').modal();
-        $("#addCustomerModal").doCenter();
+        $('#manageCustomerModal').modal();
+        $("#manageCustomerModal").doCenter();
     	
     };
     
@@ -61,6 +61,7 @@ var HomeController = function($scope, $http) {
             $scope.setSuccess('Details saved successfully..');
             $scope.editMode = false;
             $scope.readOnlyMode = false;
+            $('#manageCustomerModal').hide();
         }).error(function(response) {
             $scope.setError(response);
         });
@@ -101,9 +102,45 @@ var HomeController = function($scope, $http) {
         	$scope.readOnlyMode = false;
         }
         $scope.editMode = true;
-        $('html, body').animate({
-        	scrollTop: $("#customer-form").offset().top
-        }, 500);
+        $('#manageCustomerModal').modal();
+        $("#manageCustomerModal").doCenter();
+        
+    };
+    
+
+    $scope.noShowCustomer = function(customer) {
+        $scope.resetMessages();
+        $scope.customer = customer;
+        if(customer.status =='Notified' || customer.status =='Arrived' || customer.status == 'NoShow' ) {
+        	$scope.readOnlyMode = true;
+        	$scope.showTable = true;
+        } else  {
+        	$scope.showTable = false;
+        	$scope.readOnlyMode = false;
+        }
+        $scope.customer.status='NoShow';
+        $scope.editMode = true;
+        $('#manageCustomerModal').modal();
+        $("#manageCustomerModal").doCenter();
+        
+    };
+    
+
+    $scope.arrivedCustomer = function(customer) {
+        $scope.resetMessages();
+        $scope.customer = customer;
+        if(customer.status =='Notified' || customer.status =='Arrived' || customer.status == 'NoShow' ) {
+        	$scope.readOnlyMode = true;
+        	$scope.showTable = true;
+        } else  {
+        	$scope.showTable = false;
+        	$scope.readOnlyMode = false;
+        }
+        $scope.customer.status='Arrived';
+        $scope.editMode = true;
+        $('#manageCustomerModal').modal();
+        $("#manageCustomerModal").doCenter();
+        
     };
 
     $scope.notifyCustomer = function(customer) {

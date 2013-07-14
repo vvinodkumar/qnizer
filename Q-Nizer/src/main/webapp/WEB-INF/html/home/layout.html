@@ -1,6 +1,6 @@
 
     	<div class="row">
-    		<div id="addCustomerModal" class="modal hide fade" tabindex="-1" >
+    		<div id="manageCustomerModal" class="modal hide fade" tabindex="-1" >
      		<article class="span9">
             		<form id="customer-form" accept-charset="UTF-8" class="form-horizontal">
                 		<fieldset>
@@ -75,7 +75,7 @@
                 </form>
             </article>
             </div>
-    		<article class="span8">
+    		<article class="span12">
               <p></p>
               <legend>Waiting Guest's <span style="margin-left:10px;"><a ng-click="showNewCustomerModel();" ><img src="resources/footable/img/plus.png" title="New Guest"/></a></span></legend>
 	  		  <div ng:app ng-controller="Ctrl">
@@ -95,7 +95,7 @@
 					<th data-hide="phone,tablet">Suggested Wait Time (mins)</th>
 					<th data-hide="phone,tablet">Actual Wait Time (mins)</th>
 					<th data-hide="phone,tablet">No. Of Guests</th>
-					<th>...........................</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -105,7 +105,12 @@
             		<td>{{customer.suggestedWaitTime}}</td>
             		<td ng-class="{{customer.suggestedWaitTime}} > {{customer.actualWaitTime}} && 'color-green' || 'color-red'">{{customer.actualWaitTime}}</td>
             		<td>{{customer.guestCount}}</td>
-            		<td class="center"><a class="btn btn-1" data-type="submit" role="button"  ng-click="notifyCustomer(customer)" data-toggle="modal">Notify</a> <a class="btn btn-1" data-type="submit"  ng-click="editCustomer(customer)">Edit</a></td>
+            		<td class="center">
+            		<a data-type="submit" role="button"  ng-click="notifyCustomer(customer)" data-toggle="modal"><img src="resources/images/sms.png" alt="Notify"/></a> 
+            		<a data-type="submit"  ng-click="editCustomer(customer)"><img src="resources/images/edit.png" alt="Edit"/></a>
+            		<a data-type="submit"  ng-click="arrivedCustomer(customer)"><img src="resources/images/arrived.png" alt="Arrived"/></a>
+            		<a data-type="submit"  ng-click="noShowCustomer(customer)"><img src="resources/images/noshow.png" alt="No Show"/></a>
+            		</td>
         		</tr>
 			</tbody>
 	</table>

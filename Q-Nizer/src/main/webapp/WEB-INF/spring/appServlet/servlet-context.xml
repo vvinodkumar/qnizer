@@ -89,6 +89,7 @@
 	<!-- Test Key -->
 	<!-- <beans:property name="apiKey" value="gBr7m4ygZIgoyC3z5PeUKw"/> -->
 	<!-- Non Test key -->
+	<beans:property name="sendMail" value="true"/>
 	<beans:property name="apiKey" value="K_YN24Ie9Fv4FNKT-XWOgw"/>
 	<beans:property name="registrationFromEmailAddress" value="welcome@qnizertest.com"/>
 	<beans:property name="registrationFromName" value="Q-NIZER"/>

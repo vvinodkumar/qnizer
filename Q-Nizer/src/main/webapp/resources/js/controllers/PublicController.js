@@ -22,7 +22,11 @@ var PublicController = function($scope, $http) {
 	        $scope.resetMessages();
 	        $http.post('public/business/signup', user).success(function() {
 	        	$scope.setSuccess('User Registration Completed');
-	        	$location.path("/home");
+	            $('html, body').animate({
+	            	scrollTop: $("#frmSignup").offset().top
+	            }, 500);
+	            $scope.user=null;
+
 	        }).error(function(response) {
 	            $scope.setError(response);
 	        });

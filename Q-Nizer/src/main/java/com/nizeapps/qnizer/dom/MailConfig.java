@@ -11,6 +11,7 @@ public class MailConfig extends MandrillConfiguration implements Nizer {
 	private String activationURL;
 	private String unsubscribeURL;
 	private String copyrightMessage;
+	private boolean sendMail;
 	
 	public String getRegistrationFromEmailAddress() {
 		return registrationFromEmailAddress;
@@ -53,6 +54,12 @@ public class MailConfig extends MandrillConfiguration implements Nizer {
 	}
 	public void setRegistrationSubject(String registrationSubject) {
 		this.registrationSubject = registrationSubject;
+	}
+	public boolean isSendMail() {
+		return sendMail;
+	}
+	public void setSendMail(boolean sendMail) {
+		this.sendMail = sendMail;
 	}
 	
 	

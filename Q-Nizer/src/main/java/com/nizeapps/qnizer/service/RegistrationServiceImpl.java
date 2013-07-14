@@ -80,7 +80,9 @@ public class RegistrationServiceImpl extends BaseService implements Registration
 	
 	
 	private void sendRegistrationEmail(NizerUser user, String activationKey) throws RequestFailedException {
-		
+		 if(!config.isSendMail())
+		       return;
+	
 		MandrillTemplatedMessageRequest templateRequest = new MandrillTemplatedMessageRequest();
 		MandrillMessage message = new MandrillMessage();
 		
