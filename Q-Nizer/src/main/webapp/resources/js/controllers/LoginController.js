@@ -11,7 +11,7 @@ function LoginController($scope, $http, authService) {
 		}).
 	    success(function(data, status, headers, config) {
 	    	$scope.error = false;
-	    	 authService.loginConfirmed();
+	    	$scope.ping();
 	    }).
 	    error(function(data, status, headers, config){
 	    	 authService.loginFailed();
@@ -22,6 +22,14 @@ function LoginController($scope, $http, authService) {
 		$scope.error = false;
 		login.modal();
 	};
+	
+	$scope.ping = function() {
+        $http.get('auth/ping').success(function(response){
+            $scope.user = response.responseObject;
+	    	authService.loginConfirmed();
+        });
+    };
+
 	
 	$scope.logout = function(){
 		$http.get('j_spring_security_logout')

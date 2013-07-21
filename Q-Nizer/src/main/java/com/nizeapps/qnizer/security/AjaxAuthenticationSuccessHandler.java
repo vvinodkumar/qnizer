@@ -30,7 +30,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		user.setUserName(currentUser);
 		user.setLastLoggedInDateTime(DateUtility.getBusinessDateTime());
 		user.setCsrfToken(ESAPI.randomizer().getRandomString(8,  EncoderConstants.CHAR_ALPHANUMERICS));
-		request.getSession(true).setAttribute(USER_CONTEXT, user);
+		request.getSession().setAttribute(USER_CONTEXT, user);
 		
   }
 }

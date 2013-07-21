@@ -4,10 +4,11 @@
  * HomeController
  * @constructor
  */
-var HomeController = function($scope, $http) {
+var HomeController = function($scope,$rootScope, $http) {
     $scope.fetchCustomersList = function() {
         $http.get('home/customer/list').success(function(response){
             $scope.customers = response.responseCollection;
+            $scope.user = response.user;
         });
     };
 
@@ -127,22 +128,38 @@ var HomeController = function($scope, $http) {
     
 
     $scope.arrivedCustomer = function(customer) {
+    	
         $scope.resetMessages();
         $scope.customer = customer;
-        if(customer.status =='Notified' || customer.status =='Arrived' || customer.status == 'NoShow' ) {
-        	$scope.readOnlyMode = true;
-        	$scope.showTable = true;
-        } else  {
-        	$scope.showTable = false;
-        	$scope.readOnlyMode = false;
-        }
-        $scope.customer.status='Arrived';
-        $scope.editMode = true;
-        $('#manageCustomerModal').modal();
-        $("#manageCustomerModal").doCenter();
-        
+        $('#confirmArrival').modal();
+        $('#confirmArrival').doCenter();
     };
 
+    
+
+    $scope.arrivedCustomerUpdate = function(customer) {
+        $scope.resetMessages();
+        customer.status='Arrived';	
+        $http.put('home/customer/update', customer).success(function() {
+            $scope.fetchCustomersList();
+            $scope.customer.name = '';
+            $scope.customer.mobile = '';
+            $scope.customer.suggestedWaitTime = '';
+            $scope.customer.specialRequest = '';
+            $scope.customer.guestCount = '';
+            $scope.customer.token = '';
+            $scope.customer.status = '';
+            $scope.customer.serviceInTime = '5';
+            $scope.customer.serviceRefNo = '0';
+            $scope.setSuccess('Details saved successfully..');
+            $scope.editMode = false;
+            $scope.readOnlyMode = false;
+            $('#confirmArrival').hide();
+        }).error(function(response) {
+            $scope.setError(response);
+        });
+    };
+    
     $scope.notifyCustomer = function(customer) {
     	$("#notifyForm").show();
     	$scope.readOnlyMode = false;

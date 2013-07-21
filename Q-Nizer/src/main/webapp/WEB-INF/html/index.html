@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="resources/bootstrap/css/touchTouch.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="resources/bootstrap/css/kwicks-slider.css" type="text/css" media="screen">
 	<link href='resources/css/font.css' rel='stylesheet' type='text/css'>
-	<link href="resources/footable/footable-0.1.css" rel="stylesheet" type="text/css" />
- 	<link href="resources/footable/footable.sortable-0.1.css" rel="stylesheet" type="text/css" />
+	<link href="resources/footablev2/css/footable.core.css" rel="stylesheet" type="text/css" />
+ 	<link href="resources/footablev2/css/footable.metro.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
     <script type="text/javascript" src="resources/js/superfish.js"></script>
 	<script type="text/javascript" src="resources/js/jquery.flexslider-min.js"></script>
@@ -67,8 +67,9 @@
             <h1 class="brand brand_"><a href="#/home"><img alt="" src="resources/images/logo.png"> </a></h1>
              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse_">Menu <span class="icon-bar"></span> </a>
              <div class="nav-collapse nav-collapse_  collapse" id="menu">
-              <ul class="nav sf-menu">
-                <li ><a href="#/home">Login</a></li>
+              <ul class="nav sf-menu" >
+                <li ng-switch="user"><a ng-switch-default href="#/home">Login</a>
+                <a ng-switch-when="true"  href="#/home">Logout</a></li>
                 <li ><a href="#/public/signup">Signup</a></li>
                 <li ><a href="#/home">Home</a></li>
                 <li ><a href="#/dashboard">Dashboard</a></li>
@@ -85,7 +86,7 @@
 
 <div id="login-holder" class="modal hide fade" tabindex="-1">
   <legend>
-    Please login with your credentials
+    <span style="margin-left:10px">Login</span>
   </legend>
   
   <div id="login-inner" ng:controller="LoginController">
@@ -158,8 +159,8 @@
 <script src="resources/js/auth-events.js"></script>
 
 
-<script src="resources/footable/footable.js"></script>
-<script src="resources/footable/footable.sortable.js"></script>
+<script src="resources/footablev2/js/footable.js"></script>
+<script src="resources/footablev2/js/footable.sort.js"></script>
 <script src="resources/js/controllers/LoginController.js"></script>
 <script src="resources/js/controllers/PublicController.js"></script>
 

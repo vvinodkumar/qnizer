@@ -14,7 +14,7 @@ angular.module('angular-auth', ['http-auth-interceptor'])
         scope.error = false;
         scope.$on('event:auth-loginRequired', function() {
           login.modal();
-          login.modal.doCenter();
+          $("#login-holder").doCenter();
           main.hide();
           
         });
