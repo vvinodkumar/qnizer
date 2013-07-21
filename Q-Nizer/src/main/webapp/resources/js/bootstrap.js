@@ -2083,7 +2083,7 @@ scaleFix();
   var userag = navigator.userAgent.toLowerCase();
   var isAndroid = userag.indexOf("android") > -1; 
   if(isAndroid) {
-    $('.sf-menu').responsiveMenu({autoArrows:true});
+    //$('.sf-menu').responsiveMenu({autoArrows:true});
   }
     
 });
